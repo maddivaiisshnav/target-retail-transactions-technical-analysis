@@ -11,3 +11,4 @@ __pycache__/
 checkpoints/
 *.egg-info/
 .claude/
+local_reference/
