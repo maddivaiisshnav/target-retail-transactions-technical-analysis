@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java (Spark runs on the JVM)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest ruff
+
+      - name: Lint
+        run: ruff check src/ tests/
+
+      - name: Run unit tests (Spark cleaning/schema logic)
+        run: pytest tests/ -v
+
+      - name: Run Spark-only EDA and analysis stages (no Kafka in CI)
+        run: |
+          python src/processing/02_eda.py
+          python src/processing/03_analysis.py
