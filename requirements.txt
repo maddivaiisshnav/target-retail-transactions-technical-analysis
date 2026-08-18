@@ -1,0 +1,11 @@
+# Loose lower bounds, not exact pins: this file has to install cleanly on
+# whatever Python 3.11+ pip resolves to, both on the host and inside the
+# Docker image, and exact patch pins (e.g. numpy==2.5.1) can go missing from
+# a mirror or simply not exist for a given interpreter version.
+kafka-python-ng>=2.2.3
+numpy>=1.26
+pandas>=2.2
+py4j>=0.10.9
+pyspark==4.2.0
+streamlit>=1.38
+plotly>=5.22

@@ -1,0 +1,10 @@
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# E/F = pycodestyle + pyflakes (real bugs, dead code, undefined names).
+# I   = import sorting.
+# Deliberately not enabling stricter opinionated rule sets (e.g. flake8-bugbear's
+# "no blind except") - query_hive.py's interactive shell catches Exception on
+# purpose so one bad ad-hoc SQL query doesn't kill the whole session.
+select = ["E", "F", "I"]
