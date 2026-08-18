@@ -36,7 +36,7 @@ graph TD
     CSV[data/target_orders.csv] -->|producer.py| Kafka[Kafka topic: target_orders]
     Kafka -->|consumer.py <br> Structured Streaming| Spark[PySpark Structured Streaming]
     Spark -->|Parquet + Checkpoint| Bronze[Bronze Layer <br> Raw Ingest]
-    Bronze -->|common.py clean()| Silver[Silver Layer <br> Cleaned & Enriched]
+    Bronze -->|common.py clean| Silver[Silver Layer <br> Cleaned & Enriched]
     Silver -->|transforms.py| Gold[Gold Layer <br> Analytical Aggregations]
     Gold -->|hive_loader.py| Hive[Hive Metastore <br> Database Catalog]
     Hive -->|query_hive.py| SQL[SQL Query Engine]
